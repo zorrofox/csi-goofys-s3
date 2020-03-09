@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-2
+spec:
+  containers:
+  - name: busybox
+    image: busybox
+    command:
+      - sleep
+    args:
+      - "3600"
+    volumeMounts:
+    - name: busybox-storage
+      mountPath: /data
+  volumes:
+  - name: busybox-storage
+    persistentVolumeClaim:
+       claimName: csi-s3-pvc
+       readOnly: false
